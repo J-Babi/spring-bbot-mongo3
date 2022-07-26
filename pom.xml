@@ -86,9 +86,9 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
 	<distributionManagement>
-            <repository>
+            
+	    <repository>
 	      <id>deployment</id>
 	      <name>J-Babi Release Nexus Repository</name>
 	      <url>http://3.145.145.57:8081/repository/sbm2-release/</url>
@@ -98,8 +98,8 @@
 	      <name>J-Babi snapshot Nexus Repository</name>
 	      <url>http://3.145.145.57:8081/repository/sbm2-snapshot/</url>
             </snapshotRepository>
-        </distributionManagement>
 		
+        </distributionManagement>	
 	</dependencies>
 	<build>
 		<plugins>
