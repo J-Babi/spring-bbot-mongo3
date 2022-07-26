@@ -18,6 +18,10 @@
 		<spring-boot.version>2.1.5.RELEASE</spring-boot.version>
 		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
 		<logstash-logback-encoder.version>6.1</logstash-logback-encoder.version>
+			
+		<sonar.host.url>http://3.22.119.248:9000/</sonar.host.url>
+		<sonar.login>admin</sonar.login>
+		<sonar.password>Bila2671</sonar.password> 
 	</properties>
 
 	<dependencyManagement>
@@ -82,6 +86,20 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+	<distributionManagement>
+            <repository>
+	      <id>deployment</id>
+	      <name>J-Babi Release Nexus Repository</name>
+	      <url>http://3.145.145.57:8081/repository/sbm2-release/</url>
+            </repository> 
+	    <snapshotRepository>
+	      <id>deployment</id>
+	      <name>J-Babi snapshot Nexus Repository</name>
+	      <url>http://3.145.145.57:8081/repository/sbm2-snapshot/</url>
+            </snapshotRepository>
+        </distributionManagement>
+		
 	</dependencies>
 	<build>
 		<plugins>
