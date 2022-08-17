@@ -2,11 +2,12 @@
 #PVC(with default  StorageClass),ReplicaSet/StatefulSet & Service For Mongo.
 # storage class, pv, pvc, 
 # configMaps / Secretes
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: springappdeployment
-#  namespace: dev
+  namespace: dev
 spec:
   replicas: 2
   selector:
@@ -35,7 +36,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: springapp
-#  namespace: dev
+  namespace: dev
 spec:
   selector:
     app: springapp
@@ -49,7 +50,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mongodbpvc 
-#  namespace: dev
+  namespace: dev
 spec:
   accessModes:
     - ReadWriteOnce
@@ -61,7 +62,7 @@ apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: mongodbrs
-#  namespace: dev
+  namespace: dev
 spec:
   selector:
     matchLabels:
@@ -94,7 +95,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mongo
-#  namespace: dev
+  namespace: dev
 spec:
   type: ClusterIP
   selector:
