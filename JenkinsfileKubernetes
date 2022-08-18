@@ -1,7 +1,7 @@
 node{
      
     stage('1-SCM Checkout'){
-        git credentialsId: 'GIT_CREDENTIALS', url:  'https://github.com/simonLegah/UnityProject.git',branch: 'master'
+        git credentialsId: 'GIT_CREDENTIALS', url:  'https://github.com/J-Babi/spring-boot-mongo3',branch: 'main'
     }
     
     stage("2-Maven Clean Package"){
