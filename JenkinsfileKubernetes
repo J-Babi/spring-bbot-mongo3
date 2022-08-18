@@ -1,31 +1,38 @@
 node{
      
-    stage('SCM Checkout'){
+    stage('1-SCM Checkout'){
         git credentialsId: 'GIT_CREDENTIALS', url:  'https://github.com/simonLegah/UnityProject.git',branch: 'master'
     }
     
-    stage(" Maven Clean Package"){
-      def mavenHome =  tool name: "Maven-3.6.1", type: "maven"
+    stage("2-Maven Clean Package"){
+      def mavenHome =  tool name: "Maven-3.8.6", type: "maven"
       def mavenCMD = "${mavenHome}/bin/mvn"
       sh "${mavenCMD} clean package"
       
     } 
     
-    
-    stage('Build Docker Image'){
-        sh 'docker build -t mylandmarktech/spring-boot-mongo .'
+    stage("3-scanCode") {
+        sh "${mavenHome}/bin/mvn sonar:sonar"
+    }
+
+    stage("4-NexusUpload") {
+        nexusArtifactUploader artifacts: [[artifactId: 'spring-boot-mongo', classifier: '', file: '/var/lib/jenkins/workspace/sbm2/target/spring-boot-mongo-0.0.1.war', type: 'war']], credentialsId: 'Nexus-cred', groupId: 'spring-boot-mongo', nexusUrl: '3.17.178.255:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'sbm2-snapshot', version: '0.0.1'
     }
     
-    stage('Push Docker Image'){
+    stage('5-Build Docker Image'){
+        sh 'docker build -t jbabi/spring-boot-mongo .'
+    }
+    
+    stage('6-Push Docker Image'){
         withCredentials([string(credentialsId: 'DOKCER_HUB_PASSWORD', variable: 'DOKCER_HUB_PASSWORD')]) {
-          sh "docker login -u mylandmarktech -p ${DOKCER_HUB_PASSWORD}"
+        sh "docker login -u jbabi -p ${DOKCER_HUB_PASSWORD}"
         }
-        sh 'docker push mylandmarktech/spring-boot-mongo'
+        sh 'docker push jbab/spring-boot-mongo'
      }
      
-     stage("Deploy To Kuberates Cluster"){
+     stage("7-Deploy To Kuberates Cluster"){
        kubernetesDeploy(
-         configs: 'springBootMongo.yml', 
+         configs: 'springapp.yaml', 
          kubeconfigId: 'KUBERNATES_CONFIG',
          enableConfigSubstitution: true
         )
@@ -33,7 +40,7 @@ node{
 	 
 	  /**
       stage("Deploy To Kuberates Cluster"){
-        sh 'kubectl apply -f springBootMongo.yml'
+        sh 'kubectl apply -f springapp.yaml'
       } **/
      
 }
