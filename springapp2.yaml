@@ -46,7 +46,6 @@ apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: mongodbrs
-  namespace: dev
 spec:
   selector:
     matchLabels:
