@@ -46,7 +46,7 @@ spec:
     type: NodePort
 ---
 apiVersion: apps/v1
-kind: database # ReplicaSet
+kind: ReplicaSet
 metadata:
   name: mongodbrs
   namespace: dev
