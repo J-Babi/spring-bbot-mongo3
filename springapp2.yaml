@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: springboot
-        image: mylandmarktech/spring-boot-mongo
+        image: jbabi/spring-boot-mongo3 # mylandmarktech/spring-boot-mongo
         ports:
         - containerPort: 8080
         env:
