@@ -21,7 +21,7 @@
 			
 		<sonar.host.url>http://3.133.125.229:9000/</sonar.host.url>
  		<sonar.login>admin</sonar.login>
-		<sonar.password>${SBmongo-token}</sonar.password> 
+		<sonar.password>58cde7a4354a818220d6a14e020182b487f4f71a</sonar.password> 
 	</properties>
 
 	<dependencyManagement>
